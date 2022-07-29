@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package protobuf;
+option  go_package           = "./;protobufpb";
+option  java_multiple_files  = true;
+option  java_package         = "com.protobuf";
+option  java_outer_classname = "OnchainProto";
+
+service OnchainSrv {
+  rpc MintNFT(MintNFTReq) returns (MintNFTRes) {};
+  rpc Cancel(CancelReq) returns (CancelRes) {};
+  rpc Buy(BuyReq) returns (BuyRes) {};
+}
+message MintNFTReq { string metadata_url = 1; }
+message MintNFTRes { bool success = 1; }
+
+message CancelReq {}
+message CancelRes {}
+
+message BuyReq {}
+message BuyRes {}

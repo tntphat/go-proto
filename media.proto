@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package protobuf;
+option  go_package           = "./;protobufpb";
+option  java_multiple_files  = true;
+option  java_package         = "com.protobuf";
+option  java_outer_classname = "MediaProto";
+
+import "base.proto";
+
+service MediaSrv {
+  rpc GetAllMedia(GetAllMediaReq) returns (GetAllMediaRes) {};
+  rpc GetDetailMedia(GetDetailMediaReq) returns (GetDetailMediaRes) {};
+  rpc CreateMedia(CreateMediaReq) returns (CreateMediaRes) {};
+  rpc CreateMediaAgain(CreateMediaAgainReq) returns (CreateMediaRes) {};
+  rpc CreateCategory(CreateCategoryReq) returns (CreateCategoryRes) {};
+  rpc GetListCategory(GetListCategoryReq) returns (GetListCategoryRes) {};
+  rpc AddSignature(AddSignatureReq) returns (AddSignatureRes) {};
+}
+
+message GetAllMediaRes { repeated Media Medias = 1; }
+message GetAllMediaReq {}
+message GetDetailMediaReq { string id = 1; }
+message GetDetailMediaRes { Media Media = 1; }
+message CreateCategoryRes { Category category = 1; }
+message GetListCategoryRes { repeated Category Categories = 1; }
+message CreateMediaRes { Media media = 1; }
+
+message CreateMediaReq {
+  string          id          = 1;
+  string          name        = 2;
+  string          description = 3;
+  string          creator     = 4;
+  string          image       = 5;
+  string          category_id = 6;
+  repeated string tags        = 7;
+  string          signature   = 8;
+}
+
+message CreateMediaAgainReq { uint64 id = 1; }
+message CreateCategoryReq {
+  string name        = 1;
+  string description = 2;
+  string access_key  = 3;
+}
+message GetListCategoryReq {}
+
+message AddSignatureReq {
+  string id      = 1;
+  string name    = 2;
+  string creator = 3;
+}
+
+message AddSignatureRes { bool success = 1; }
